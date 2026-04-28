@@ -1,0 +1,12 @@
+{
+  "trueFalse": [
+    {
+      "id": 1,
+      "question_en": "Example question?",
+      "question_ar": "مثال سؤال؟",
+      "answer": true
+    }
+  ],
+  "singleChoice": [],
+  "multipleChoice": []
+}

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>اختبار مصطلحات ومراسلات</title>
+<style>
+body { font-family: Arial; direction: rtl; text-align: center; background:#f5f5f5; }
+.container { background:#fff; padding:20px; margin:50px auto; width:70%; border-radius:10px; box-shadow:0 0 10px #ccc;}
+button { padding:10px 20px; margin:10px; font-size:16px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>اختبار صح / خطأ</h2>
+<p id="question"></p>
+
+<button onclick="answer(true)">صح</button>
+<button onclick="answer(false)">خطأ</button>
+
+<p id="progress"></p>
+<button onclick="nextQuestion()">التالي</button>
+
+<h3 id="result"></h3>
+</div>
+
+<script>
+const questions = [
+{question: "1", answer: false},
+{question: "2", answer: false},
+{question: "3", answer: false},
+{question: "4", answer: false},
+{question: "5", answer: false},
+{question: "6", answer: false},
+{question: "7", answer: false},
+{question: "8", answer: false},
+{question: "9", answer: false},
+{question: "10", answer: false},
+{question: "11", answer: false},
+{question: "12", answer: false},
+{question: "13", answer: false},
+{question: "14", answer: false},
+{question: "15", answer: false},
+{question: "16", answer: false},
+{question: "17", answer: false},
+{question: "18", answer: false},
+{question: "19", answer: false},
+{question: "20", answer: false},
+{question: "21", answer: false},
+{question: "22", answer: false},
+{question: "23", answer: false},
+{question: "24", answer: false},
+{question: "25", answer: false},
+{question: "26", answer: false},
+{question: "27", answer: false},
+{question: "28", answer: false},
+{question: "29", answer: false},
+{question: "30", answer: false},
+{question: "31", answer: false},
+{question: "32", answer: false},
+{question: "33", answer: false},
+{question: "34", answer: false},
+{question: "35", answer: false},
+{question: "36", answer: false},
+{question: "37", answer: false},
+{question: "38", answer: false},
+{question: "39", answer: false},
+{question: "40", answer: false},
+{question: "41", answer: false},
+{question: "42", answer: false},
+{question: "43", answer: false},
+{question: "44", answer: false},
+{question: "45", answer: false},
+{question: "46", answer: false},
+{question: "47", answer: false},
+{question: "48", answer: false},
+{question: "49", answer: false},
+{question: "50", answer: false},
+{question: "51", answer: false},
+{question: "52", answer: false},
+{question: "53", answer: false},
+{question: "54", answer: false},
+{question: "55", answer: false},
+{question: "56", answer: false},
+{question: "57", answer: false},
+{question: "58", answer: false},
+{question: "59", answer: false},
+{question: "60", answer: false},
+{question: "61", answer: false},
+{question: "62", answer: false},
+{question: "63", answer: false},
+{question: "64", answer: false},
+{question: "65", answer: false},
+{question: "66", answer: false},
+{question: "67", answer: false},
+{question: "68", answer: false},
+{question: "69", answer: false},
+{question: "70", answer: false},
+{question: "71", answer: false},
+{question: "72", answer: false},
+{question: "73", answer: false},
+{question: "74", answer: false},
+{question: "75", answer: false},
+{question: "76", answer: false},
+{question: "77", answer: false},
+{question: "78", answer: false},
+{question: "79", answer: false},
+{question: "80", answer: false},
+{question: "81", answer: false},
+{question: "82", answer: false},
+{question: "83", answer: false},
+{question: "84", answer: false},
+{question: "85", answer: false},
+{question: "86", answer: false},
+{question: "87", answer: false},
+{question: "88", answer: false},
+{question: "89", answer: false},
+{question: "90", answer: false},
+{question: "91", answer: false},
+{question: "92", answer: false},
+{question: "93", answer: false},
+{question: "94", answer: false},
+{question: "95", answer: false},
+{question: "96", answer: false},
+{question: "97", answer: false},
+{question: "98", answer: false},
+{question: "99", answer: false},
+{question: "100", answer: false},
+{question: "101", answer: false},
+{question: "102", answer: false},
+{question: "103", answer: false},
+{question: "104", answer: false},
+{question: "105", answer: false},
+{question: "106", answer: false},
+{question: "107", answer: false},
+{question: "108", answer: false},
+{question: "109", answer: false},
+{question: "110", answer: false},
+{question: "111", answer: false},
+{question: "112", answer: false},
+{question: "113", answer: false},
+{question: "114", answer: false},
+{question: "115", answer: false},
+{question: "116", answer: false},
+{question: "117", answer: false},
+{question: "118", answer: false},
+{question: "119", answer: false},
+{question: "120", answer: false},
+{question: "121", answer: false},
+{question: "122", answer: false},
+{question: "123", answer: false},
+{question: "124", answer: false},
+{question: "125", answer: false},
+{question: "126", answer: false},
+{question: "127", answer: false},
+{question: "128", answer: false},
+{question: "129", answer: false},
+{question: "130", answer: false},
+{question: "131", answer: false},
+{question: "132", answer: false},
+{question: "133", answer: false},
+{question: "134", answer: false},
+{question: "135", answer: false},
+{question: "136", answer: false},
+{question: "137", answer: false},
+{question: "138", answer: false},
+{question: "139", answer: false},
+{question: "140", answer: false},
+{question: "141", answer: false},
+{question: "142", answer: false},
+{question: "143", answer: false},
+{question: "144", answer: false},
+{question: "145", answer: false},
+{question: "146", answer: false},
+{question: "147", answer: false},
+{question: "148", answer: false},
+{question: "149", answer: false},
+{question: "150", answer: false},
+{question: "151", answer: false},
+{question: "152", answer: false},
+{question: "153", answer: false},
+{question: "154", answer: false},
+{question: "155", answer: false},
+{question: "156", answer: false},
+{question: "157", answer: false},
+{question: "158", answer: false},
+{question: "159", answer: false},
+{question: "160", answer: false},
+{question: "161", answer: false},
+{question: "162", answer: false},
+{question: "163", answer: false},
+{question: "164", answer: false},
+{question: "165", answer: false},
+{question: "166", answer: false},
+{question: "167", answer: false},
+{question: "168", answer: false},
+{question: "169", answer: false},
+{question: "170", answer: false},
+{question: "171", answer: false},
+{question: "172", answer: false},
+{question: "173", answer: false},
+{question: "174", answer: false},
+{question: "175", answer: false},
+{question: "176", answer: false},
+{question: "177", answer: false},
+{question: "178", answer: false},
+{question: "179", answer: false},
+{question: "180", answer: false},
+{question: "181", answer: false},
+{question: "182", answer: false},
+{question: "183", answer: false},
+{question: "184", answer: false},
+{question: "185", answer: false},
+{question: "186", answer: false},
+{question: "187", answer: false},
+{question: "188", answer: false},
+{question: "189", answer: false},
+{question: "190", answer: false},
+{question: "191", answer: false},
+{question: "192", answer: false}
+];
+
+let current = 0;
+let score = 0;
+let selected = null;
+
+function loadQuestion(){
+    document.getElementById("question").innerText = questions[current].question;
+    document.getElementById("progress").innerText = "السؤال " + (current+1) + " من " + questions.length;
+    selected = null;
+}
+
+function answer(choice){
+    selected = choice;
+}
+
+function nextQuestion(){
+    if(selected === null){
+        alert("اختر إجابة أولاً");
+        return;
+    }
+
+    if(selected === questions[current].answer){
+        score++;
+    }
+
+    current++;
+
+    if(current < questions.length){
+        loadQuestion();
+    } else {
+        document.getElementById("result").innerText = 
+        "انتهى الاختبار 🎯 نتيجتك: " + score + " / " + questions.length;
+        document.getElementById("question").style.display="none";
+    }
+}
+
+loadQuestion();
+</script>
+
+</body>
+</html>
